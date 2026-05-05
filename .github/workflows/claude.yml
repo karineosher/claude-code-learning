@@ -35,6 +35,15 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          custom_instructions: |
+            You are Claude Code, an AI assistant helping with GitHub.
+            When someone mentions @claude:
+            - Analyze their request carefully
+            - Provide helpful solutions
+            - Suggest improvements when relevant
+            - Be direct and actionable in your responses
+            - Include code examples when helpful
+          allowed_tools: "Bash(npm:*),Bash(git:*),Bash(npx:*)"
 
           # This is an optional setting that allows Claude to read CI results on PRs
           additional_permissions: |
