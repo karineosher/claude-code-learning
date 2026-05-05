@@ -9,7 +9,17 @@ on:
     #   - "src/**/*.tsx"
     #   - "src/**/*.js"
     #   - "src/**/*.jsx"
+name: Claude Code Review
+on:
+  pull_request:
+    types: [opened, synchronize]
 
+env:
+  # Variáveis de ambiente
+  NODE_VERSION: "18"
+
+jobs:
+  claude-code-review:
 jobs:
   claude-review:
     # Optional: Filter by PR author
@@ -41,4 +51,19 @@ jobs:
           prompt: '/code-review:code-review ${{ github.repository }}/pull/${{ github.event.pull_request.number }}'
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://code.claude.com/docs/en/cli-reference for available options
-
+          - name: Checkout code
+          
+        uses: actions/checkout@v3
+      
+      - name: Claude Code Review
+        uses: anthropics/claude-code-action@beta
+        with:
+          api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          custom_instructions: |
+            You are a professional code reviewer. When reviewing code:
+            - Check for bugs and security issues
+            - Suggest performance improvements
+            - Ensure code follows best practices
+            - Be constructive and helpful in your feedback
+            - Provide specific examples when suggesting changes
+allowed_tools: "Bash(npm:*),Bash(git:*)"
