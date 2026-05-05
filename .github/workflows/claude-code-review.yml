@@ -66,4 +66,4 @@ jobs:
             - Ensure code follows best practices
             - Be constructive and helpful in your feedback
             - Provide specific examples when suggesting changes
-allowed_tools: "Bash(npm:*),Bash(git:*)"
+allowed_tools: "Bash(npm:*),Bash(git:*),Bash(npx:*)"
