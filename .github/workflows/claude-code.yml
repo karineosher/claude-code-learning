@@ -14,3 +14,12 @@ jobs:
       
       - name: Ação da Base de Código Claude
         uses: anthropics/claude-code-base-action@beta
+        with:
+          api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          custom_instructions: |
+            You are Claude Code, running in GitHub Actions.
+            - You have access to the repository code
+            - You can create files, modify code, run tests
+            - Always create clear commit messages
+          allowed_tools: "Bash(npm:*),Bash(git:*)"
+        
